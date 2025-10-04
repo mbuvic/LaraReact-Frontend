@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Menu, X, Heart } from 'lucide-react';
+import GoogleTranslate from '../GoogleTranslate';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -38,7 +39,7 @@ const Header = () => {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden md:flex items-center gap-6">
             {navItems.map((item, index) => (
               <motion.div
                 key={item.name}
@@ -64,6 +65,9 @@ const Header = () => {
                 </Link>
               </motion.div>
             ))}
+            <div className="ml-2">
+              <GoogleTranslate />
+            </div>
           </nav>
 
           {/* Mobile menu button */}
@@ -114,6 +118,9 @@ const Header = () => {
                 </Link>
               </motion.div>
             ))}
+            <div className="px-4 pt-2">
+              <GoogleTranslate />
+            </div>
           </div>
         </motion.nav>
       </div>
