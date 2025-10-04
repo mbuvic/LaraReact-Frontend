@@ -23,7 +23,7 @@ const GoogleTranslate = () => {
         new window.google.translate.TranslateElement(
           {
             pageLanguage: 'en',
-            includedLanguages: 'en,es,fr,de,it,pt,zh-CN,ja,ko,ar,ru',
+            includedLanguages: 'en,es,fr,de,it,pt,zh-CN,ja,ko,ar,ru,sw,luo',
             layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
             autoDisplay: false,
           },
