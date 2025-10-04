@@ -43,20 +43,49 @@ const GoogleTranslate = () => {
     const style = document.createElement('style');
     style.innerHTML = `
       .goog-te-banner-frame.skiptranslate,
-      .goog-te-banner-frame {
+      .goog-te-banner-frame,
+      .goog-te-banner-frame.skiptranslate iframe,
+      iframe.goog-te-banner-frame.skiptranslate {
         display: none !important;
+        visibility: hidden !important;
       }
       body {
         top: 0 !important;
+        position: static !important;
+      }
+      body.translated-ltr {
+        margin-top: 0 !important;
       }
     `;
+    style.id = 'google-translate-custom-styles';
     document.head.appendChild(style);
+
+    // Additional observer to catch the banner when it appears
+    const observer = new MutationObserver(() => {
+      const banner = document.querySelector('.goog-te-banner-frame');
+      if (banner) {
+        (banner as HTMLElement).style.display = 'none';
+        (banner as HTMLElement).style.visibility = 'hidden';
+      }
+      document.body.style.top = '0';
+      document.body.style.position = 'static';
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
 
     return () => {
       // Cleanup
+      observer.disconnect();
       const script = document.getElementById('google-translate-script');
       if (script) {
         script.remove();
+      }
+      const styles = document.getElementById('google-translate-custom-styles');
+      if (styles) {
+        styles.remove();
       }
       delete window.googleTranslateElementInit;
     };
