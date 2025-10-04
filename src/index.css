@@ -219,3 +219,40 @@ All colors MUST be HSL for consistency and theming.
     transform: translateY(-5px);
   }
 }
+
+/* Google Translate Custom Styling */
+.goog-te-gadget {
+  font-family: inherit !important;
+}
+
+.goog-te-gadget-simple {
+  background-color: hsl(var(--card)) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  border-radius: 0.75rem !important;
+  padding: 0.5rem 1rem !important;
+  font-size: 0.875rem !important;
+  color: hsl(var(--foreground)) !important;
+  box-shadow: var(--shadow-card) !important;
+  transition: all 0.3s ease !important;
+}
+
+.goog-te-gadget-simple:hover {
+  background-color: hsl(var(--card-hover)) !important;
+  box-shadow: var(--shadow-soft) !important;
+}
+
+.goog-te-gadget-icon {
+  display: none !important;
+}
+
+.goog-te-menu-value {
+  color: hsl(var(--foreground)) !important;
+}
+
+.goog-te-menu-value span {
+  color: hsl(var(--muted-foreground)) !important;
+}
+
+.goog-te-menu-value span:hover {
+  color: hsl(var(--primary)) !important;
+}

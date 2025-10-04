@@ -1,4 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { Globe } from 'lucide-react';
 
 declare global {
   interface Window {
@@ -8,6 +9,8 @@ declare global {
 }
 
 const GoogleTranslate = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   useEffect(() => {
     // Check if script is already loaded
     if (document.getElementById('google-translate-script')) {
@@ -36,6 +39,19 @@ const GoogleTranslate = () => {
     script.async = true;
     document.body.appendChild(script);
 
+    // Hide the Google Translate top bar
+    const style = document.createElement('style');
+    style.innerHTML = `
+      .goog-te-banner-frame.skiptranslate,
+      .goog-te-banner-frame {
+        display: none !important;
+      }
+      body {
+        top: 0 !important;
+      }
+    `;
+    document.head.appendChild(style);
+
     return () => {
       // Cleanup
       const script = document.getElementById('google-translate-script');
@@ -47,10 +63,20 @@ const GoogleTranslate = () => {
   }, []);
 
   return (
-    <div 
-      id="google_translate_element" 
-      className="inline-block"
-    />
+    <div className="relative">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="flex items-center gap-2 px-4 py-2 rounded-xl bg-secondary/50 text-secondary-foreground hover:bg-secondary transition-all duration-300 font-medium"
+      >
+        <Globe className="w-4 h-4" />
+        <span className="hidden sm:inline">Language</span>
+      </button>
+      
+      <div 
+        id="google_translate_element" 
+        className={`absolute top-full right-0 mt-2 ${isOpen ? 'block' : 'hidden'}`}
+      />
+    </div>
   );
 };
 
